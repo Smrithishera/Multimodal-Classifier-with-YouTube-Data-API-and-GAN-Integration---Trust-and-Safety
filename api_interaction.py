@@ -1,0 +1,57 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyORHt2wnRPLiuvfriM6mL6t",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Smrithishera/Multimodal-Classifier-with-YouTube-Data-API-and-GAN-Integration---Trust-and-Safety/blob/main/api_interaction.py\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "XFFgdIjV42LS"
+      },
+      "outputs": [],
+      "source": [
+        "import os\n",
+        "from dotenv import load_dotenv\n",
+        "from googleapiclient.discovery import build\n",
+        "\n",
+        "# Load environment variables from .env file\n",
+        "load_dotenv()\n",
+        "\n",
+        "def fetch_video_metadata(video_id):\n",
+        "    api_key = os.getenv('YOUTUBE_API_KEY')\n",
+        "    youtube = build('youtube', 'v3', developerKey=api_key)\n",
+        "    request = youtube.videos().list(\n",
+        "        part='snippet',\n",
+        "        id=video_id\n",
+        "    )\n",
+        "    response = request.execute()\n",
+        "    return response['items'][0]['snippet']\n",
+        "\n"
+      ]
+    }
+  ]
+}
